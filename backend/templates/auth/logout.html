@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <div class="wrapper">
+        <header class="header">
+            <nav>
+                <div class="navbar">
+                    <div class="navbar__left">
+                        <div class="navbar__left_home">
+                            <a href="{{ url_for('index') }}" class="navbar__link">Home</a>
+                        </div>
+                    </div>
+                    <div class="navbar__right">
+                        <div class="navbar__logout">
+                            <a href="{{ url_for('logout_view') }}" class="navbar__link">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main">
+            
+            <div class="main-container">
+                <div class="logout-container">
+                    <h2 class="main__title">Выход из аккаунта</h2>
+                    <div class="btn-wrapper">
+                        <button class="submitbtn" id="logout">Выйти</button>
+                    </div>
+                </div>
+
+            </div>   
+        </main>
+
+        <footer class="footer">
+            <div class="footer-container">
+                <p>© 2024 Todo App</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const baseUrlLogout = window.location.protocol + "//" + window.location.host + "/api/v1";
+        const btnLogout = document.getElementById('logout')
+
+        async function logout() {
+            return await fetch(`${baseUrlLogout}/users/logout`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    }
+                });
+            };
+
+      
+        btnLogout.onclick = async () => {
+          console.log('logout');
+          let response =  await logout();
+          let responseData =  await response.json();
+          sessionStorage.removeItem('token')
+          window.location.href = window.location.protocol + "//" + window.location.host;
+        }
+
+    </script>
+  </body>
+</html>
+
+

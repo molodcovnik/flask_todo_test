@@ -1,0 +1,52 @@
+.form
+    width: 50%
+    height: 33rem
+    margin: 5rem auto
+    display: flex
+    flex-direction: column
+    gap: 3rem
+    align-items: center
+
+    background: #f7f6f6
+    box-shadow: 0 0 2rem #b1cbff
+    border-radius: 1rem
+    &__field
+        display: flex
+        flex-direction: column
+        width:50%
+        text-align:center
+        &:first-of-type
+            margin-top: 3rem
+        label
+            text-align: center
+            font-size: 2rem
+            font-weight: bold
+            color: #807e7e
+            font-weight: 400
+        input
+            margin-top: 2rem
+            background: #e3ecff
+            height: 4rem
+            padding-left: 2rem
+            border: none
+            box-shadow: 0 0 2rem #b1cbff
+            border-radius: 1rem
+            font-size: 1.5rem
+            letter-spacing: .1rem
+            &:active
+                border: .1rem solid #b1cbff
+.submitbtn,
+.add-todo-btn
+    width: 20rem
+    height: 3.5rem
+    border-radius: 1rem
+    color: #fff
+    padding: 0 1rem
+    background: none
+    border: none
+    outline: none
+    background: linear-gradient(122deg, #656ac6 0.01%, #a148e9 49.9%, #0f147a 100%)
+    cursor: pointer
+    
+.add-todo-btn
+    float: right

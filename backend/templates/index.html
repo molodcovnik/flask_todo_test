@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <div class="wrapper">
+        <header class="header">
+            <nav>
+                <div class="navbar">
+                    <div class="navbar__left">
+                        <div class="navbar__left_home">
+                            <a href="{{ url_for('index') }}" class="navbar__link">Home</a>
+                        </div>
+                    </div>
+                    <div class="navbar__right">
+                    {% if context %}
+                    <div class="navbar__logout">
+                        <a href="{{ url_for('logout_view') }}" class="navbar__link">Logout</a>
+                    </div>
+                    {% else %}
+                    <div class="navbar__signup">
+                        <a href="{{ url_for('signup_view') }}" class="navbar__link">Signup</a>
+                    </div>
+                    <div class="navbar__login">
+                        <a href="{{ url_for('login_view') }}" class="navbar__link">Login</a>
+                    </div>
+                    {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="main-container">
+              
+                {% if context %}
+                    <h2 class="main__title">Список задач</h2>
+                    <section class="todos">
+                        <button id="addTodoBtn" class="add-todo-btn">Добавить задачу</button>
+
+                        <div id="modal" class="todo-popup">
+                            <div class="todo-popup__content">
+                                <span id="close-modal" class="todo-popup__close">&times;</span>
+                                <h2 class="todo-popup__title">Добавить задачу</h2>
+                                <form method="post" id="todo-popup__form" class="form_popup">
+                                    <div class="popform__field">
+                                        <label for="title">Название</label>
+                                        <input type="text" placeholder="Название задачи" id="title" name="title" required>
+                                    </div>
+            
+                                    <div class="popform__field">
+                                        <label for="description">Описание</label>
+                                        <input type="text" placeholder="Описание задачи" id="description" name="description">
+                                    </div>
+                                    <div class="popform__submit-btn">
+                                        <button type="submit" id="submitbtn">Добавить</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="todo-list">
+                            <table class="todo-list__table">
+                              <thead class="todo-list__header">
+                                <tr>
+                                  <th class="todo-list__column-name">Название</th>
+                                  <th class="todo-list__column-description">Описание</th>
+                                  <th class="todo-list__column-actions">Время создания</th>
+                                  <th class="todo-list__column-actions">Действия</th>
+                                </tr>
+                              </thead>
+                              <tbody class="todo-list__body">
+                              </tbody>
+                            </table>
+                          </div>
+
+                          
+
+                    </section>
+                {% else %}
+                <h2 class="main__title"><a href="{{ url_for('login_view') }}" class="login-next">Войдите в аккаунт</a></h2>
+                {% endif %}
+
+            </div>   
+        </main>
+
+        <footer class="footer">
+            <div class="footer-container">
+                <p>© 2024 Todo App</p>
+            </div>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

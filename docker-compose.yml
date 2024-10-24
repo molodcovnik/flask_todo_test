@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  db_todo:
+    container_name: db_todo
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: todo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d todo" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./dataset:/docker-entrypoint-initdb.d
+      - ./data:/var/lib/postgresql/data
+
+  todo_back:
+    build: .
+    environment:
+      FLASK_ENV: development
+      DB_NAME: todo
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: db_todo
+      DB_PORT: 5432
+    depends_on:
+      - db_todo
+    ports:
+      - "5001:5001"
+
+volumes:
+  data:

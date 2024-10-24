@@ -1,0 +1,43 @@
+.todo-list
+  padding-top: 10rem
+  &__table
+    width: 100%
+    border-collapse: collapse
+    background-color: #fff
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
+    border-radius: 10px
+
+  &__header
+    background-color: #f0f0f0
+    text-align: left
+    font-weight: bold
+
+  &__column-name, &__column-description, &__column-actions 
+    padding: 15px
+    font-size: 16px
+
+  &__body
+    .todo-list__row
+      &:nth-child(odd)
+        background-color: #f9f9f9
+      
+
+  &__cell 
+    padding: 15px
+    border-bottom: 1px solid #ddd
+  &__button
+    color: #000
+    border: none
+    padding: 5px 10px
+    border-radius: 5px
+    cursor: pointer
+    transition: background 0.3s ease
+    &_delete
+        background: #de3737
+        &:hover
+            transform: scale(1.1)
+    &_change
+        background: #dcf617
+        &:hover
+            transform: scale(1.1)
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <div class="wrapper">
+        <header class="header">
+            <nav>
+                <div class="navbar">
+                    <div class="navbar__left">
+                        <div class="navbar__left_home">
+                            <a href="{{ url_for('index') }}" class="navbar__link">Home</a>
+                        </div>
+                    </div>
+                    <div class="navbar__right">
+                    {% if context %}
+                    <div class="navbar__logout">
+                        <a href="{{ url_for('logout_view') }}" class="navbar__link">Logout</a>
+                    </div>
+                    {% else %}
+                    <div class="navbar__signup">
+                        <a href="{{ url_for('signup_view') }}" class="navbar__link">Signup</a>
+                    </div>
+                    <div class="navbar__login">
+                        <a href="{{ url_for('login_view') }}" class="navbar__link">Login</a>
+                    </div>
+                    {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="main-container">
+                <h2 class="main__title">Регистрация</h2>
+                <div class="register">
+                    <form method="post" id="register__form" class="form">
+                        <div class="form__field">
+                            <label for="username">Username</label>
+                            <input type="text" placeholder="Enter username" id="username" name="username" required>
+                        </div>
+
+                        <div class="form__field">
+                            <label for="password">Password</label>
+                            <input type="text" placeholder="Enter password" id="password" name="password" required>
+                        </div>
+                        <div class="form__submit-btn">
+                          <button type="submit" class="submitbtn" id="signup">Зарегистрироваться</button>
+                        </div>
+                    </form>
+                </div>
+            
+
+            </div>   
+        </main>
+
+        <footer class="footer">
+            <div class="footer-container">
+                <p>© 2024 Todo App</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        const baseUrlAuth = window.location.protocol + "//" + window.location.host + "/api/v1";
+        const form = document.getElementById('register__form');
+
+        form.onsubmit = async (e) => {
+          console.log('click');
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            console.log(username);
+            const password = document.getElementById('password').value;
+            console.log(username);
+            const data = {
+                "username": username,
+                "password": password,
+            };
+                                      
+            let response = await fetch(`${baseUrlAuth}/users/signup`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+              });
+            let result = await response.json();
+            window.location.href = window.location.protocol + "//" + window.location.host + "/users/login";
+        };
+    </script>
+  </body>
+</html>
